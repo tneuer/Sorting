@@ -229,14 +229,16 @@ class Constraints():
         for i, c in enumerate(elements.elements.items()):
             print("{} : {}".format(i, c[0], "->", c[1]))
 
-    def update(self, elements):
-        pass
-
     def get_length(self):
         return len(self.constraints)
 
 
-def Tree():
+class ClassName(object):
+     """docstring for ClassName"""
+     def __init__(self, arg):
+         super(ClassName, self).__init__()
+         self.arg = arg
+          Tree():
     def __init__(self):
         self.edges = []
         self.outgoing_from_node = {}
@@ -261,7 +263,7 @@ def Tree():
                     has_no_incoming_edge.append(target_node)
 
         if edges: # Check if empty
-            raise ValueError("Cyclic input")
+            raise Value--Error("Cyclic input")
         else:
             print(L)
             pass
@@ -269,73 +271,3 @@ def Tree():
 
 main = Main_mode()
 main.main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-elements = [5, 7, 3, 11, 8, 2, 9, 10]
-constraints = [[5, 11], [7, 11], [7, 8], [3, 8], [3, 10], [11, 2], [11, 9], [11, 10], [8, 9], [9, 5]]
-
-edges = constraints[:]
-outgoing_from_node = {}
-for e in elements:
-    outgoing_from_node[e] = []
-    for edge in edges:
-        if e == edge[0]:
-            outgoing_from_node[e].append(edge[1])
-
-incoming_edges = np.array(constraints)[:, 1]
-incoming_edge_counter = {}
-for e in elements:
-    incoming_edge_counter[e] = 0
-
-for incoming_edge in incoming_edges:
-    incoming_edge_counter[incoming_edge] += 1
-
-has_no_incoming_edge = []
-for key, value in incoming_edge_counter.items():
-    if value==0:
-        has_no_incoming_edge.append(key)
-
-L = [] # sorted, will be filled
-while has_no_incoming_edge:
-    removed_node = has_no_incoming_edge.pop(0)
-    L.append(removed_node)
-
-    outgoing_from_removed_node = outgoing_from_node[removed_node]
-    for target_node in outgoing_from_removed_node:
-        incoming_edge_counter[target_node] -= 1
-        edges.remove([removed_node, target_node])
-        if incoming_edge_counter[target_node]==0:
-            has_no_incoming_edge.append(target_node)
-
-if edges: # Check if empty
-    raise ValueError("Cyclic input")
-else:
-    print(L)
-
-
-
